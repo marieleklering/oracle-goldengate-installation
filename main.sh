@@ -1,5 +1,4 @@
 #!/bin/bash
-sudo su -
 ##add groups for oracle:
 groupadd -g 54321 oinstall
 groupadd -g 54322 dba
