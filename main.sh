@@ -63,5 +63,15 @@ wget https://github.com/marieleklering/project2/blob/master/db.env
 .db.env
 
 ##download midias
+mkdir -p /home/oracle/midias/
+cd /home/oracle/midias/
+wget https://s3.amazonaws.com/oracle-midias/123010_fbo_ggs_Linux_x64_services_shiphome.zip
+wget https://s3.amazonaws.com/oracle-midias/p13390677_112040_Linux-x86-64_1of7.zip
+wget https://s3.amazonaws.com/oracle-midias/p13390677_112040_Linux-x86-64_2of7.zip
+
+##unzip midias
+unzip https://s3.amazonaws.com/oracle-midias/123010_fbo_ggs_Linux_x64_services_shiphome.zip
+unzip https://s3.amazonaws.com/oracle-midias/p13390677_112040_Linux-x86-64_1of7.zip
+unzip https://s3.amazonaws.com/oracle-midias/p13390677_112040_Linux-x86-64_2of7.zip
 
 
