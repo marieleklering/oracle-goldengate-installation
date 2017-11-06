@@ -1,10 +1,14 @@
 #!/bin/bash
 sudo su -
+##add groups for oracle:
 groupadd -g 54321 oinstall
 groupadd -g 54322 dba
 groupadd -g 54323 oper
 useradd -u 54321 -g oinstall -G dba,oper oracle
+##update yum
 yum update -y
+
+##add config for oracle database installation
 echo "kernel.shmmni = 4096" >> /etc/sysctl.conf
 echo "kernel.shmmax = 4398046511104" >> /etc/sysctl.conf
 echo "kernel.shmall = 1073741824" >> /etc/sysctl.conf
@@ -26,6 +30,8 @@ echo "oracle   soft   core     unlimited" >> /etc/security/limits.conf
 echo "oracle   hard   core     unlimited" >> /etc/security/limits.conf
 echo "oracle   soft   memlock  50000000" >> /etc/security/limits.conf
 echo "oracle   hard   memlock  50000000" >> /etc/security/limits.conf
+
+##install necessary packages
 yum install -y compat-libstdc++-33 
 yum install -y elfutils-libelf 
 yum install -y elfutils-libelf-devel 
@@ -45,6 +51,9 @@ yum install -y make
 yum install -y sysstat 
 yum install -y unixODBC 
 yum install -y unixODBC-devel
+
+##create mount point
 cd /home/ec2-user/
 mkdir /u01
 mount /dev/xvda1 /u01/
+
