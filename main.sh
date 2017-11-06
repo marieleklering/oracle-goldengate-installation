@@ -57,3 +57,11 @@ cd /home/ec2-user/
 mkdir /u01
 mount /dev/xvda1 /u01/
 
+##download db.env file
+cd /home/oracle
+wget https://github.com/marieleklering/project2/blob/master/db.env
+.db.env
+
+##download midias
+
+
