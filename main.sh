@@ -45,3 +45,6 @@ yum install -y make
 yum install -y sysstat 
 yum install -y unixODBC 
 yum install -y unixODBC-devel
+cd /home/ec2-user/
+mkdir /u01
+mount /dev/xvda1 /u01/
