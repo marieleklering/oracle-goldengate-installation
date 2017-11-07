@@ -125,7 +125,7 @@ REGISTER_SERVICEMANAGER_AS_A_SERVICE=false
 # This option is only needed when CONFIGURATION_OPTION is ADD
 #
 # Specify if Service Manager should be integrated with XAG. This option is mutua
-lly exclusive with the 'REGISTER_SERVICEMANAGER_AS_A_SERVICE' option.
+#lly exclusive with the 'REGISTER_SERVICEMANAGER_AS_A_SERVICE' option.
 # Specify true if Service Manager should be integrated with XAG, false otherwise.
 #-------------------------------------------------------------------------------
 INTEGRATE_SERVICEMANAGER_WITH_XAG=false
@@ -371,3 +371,4 @@ OGG_SCHEMA=ggs
 # Specify if the deployment files should be removed from disk.
 # Specify true if the deployment files should be removed, false otherwise.
 #-------------------------------------------------------------------------------
+REMOVE_DEPLOYMENT_FROM_DISK=
