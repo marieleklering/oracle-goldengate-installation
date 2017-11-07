@@ -88,18 +88,4 @@ mkdir -p /u01/app/oracle/flash_recovery_area/
 chown -R oracle.oinstall /u01/app
 chown -R oracle.oinstall /home/oracle/
 
-##installation db software 
-su - oracle
-cd midias/database
-./runInstaller -silent -responseFile /home/oracle/midias/db_install.rsp -ignoreSysPrereqs -ignorePrereq -waitforcompletion -showProgress
-./u01/app/oraInventory/orainstRoot.sh
-./u01/app/oracle/product/11.2.0/db_1/root.sh
-
-##config netca
-cd /home/oracle/midias
-netca -silent -responseFile /home/oracle/midias/netca.rsp
-
-##install DB
-dbca -silent -responseFile /home/oracle/midias/dbca.rsp
-
 
