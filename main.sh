@@ -67,6 +67,10 @@ cd /home/oracle/midias/
 wget https://s3.amazonaws.com/oracle-midias/123010_fbo_ggs_Linux_x64_services_shiphome.zip
 wget https://s3.amazonaws.com/oracle-midias/p13390677_112040_Linux-x86-64_1of7.zip
 wget https://s3.amazonaws.com/oracle-midias/p13390677_112040_Linux-x86-64_2of7.zip
+wget https://raw.githubusercontent.com/marieleklering/project2/master/db_install.rsp
+wget https://raw.githubusercontent.com/marieleklering/project2/master/netca.rsp
+wget https://raw.githubusercontent.com/marieleklering/project2/master/dbca.rsp
+
 
 ##unzip midias
 unzip 123010_fbo_ggs_Linux_x64_services_shiphome.zip
@@ -80,15 +84,7 @@ mkdir -p /u01/app/oracle/product/11.2.0/db_1
 mkdir -p /u01/app/oracle/oradata/
 mkdir -p /u01/app/oracle/flash_recovery_area/
 chown -R oracle.oinstall /u01/app
-
-##download response file
-su - oracle
-cd /home/oracle/midias/
-wget https://raw.githubusercontent.com/marieleklering/project2/master/db_install.rsp
-wget https://raw.githubusercontent.com/marieleklering/project2/master/netca.rsp
-wget https://raw.githubusercontent.com/marieleklering/project2/master/dbca.rsp
-
-
+chown -R oracle.oinstall /home/oracle/
 
 
 
