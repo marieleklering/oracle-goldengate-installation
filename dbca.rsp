@@ -167,7 +167,7 @@ GDBNAME = "tpharma1"
 # Default value : <db_name> specified in GDBNAME
 # Mandatory     : No
 #-----------------------------------------------------------------------------
-SID = "ORA11G"
+SID = "tpharma1"
 
 #-----------------------------------------------------------------------------
 # Name          : NODELIST
@@ -208,7 +208,7 @@ TEMPLATENAME = "General_Purpose.dbc"
 # Default value : None
 # Mandatory     : Yes
 #-----------------------------------------------------------------------------
-SYSPASSWORD = "password"
+SYSPASSWORD = "manager"
 
 #-----------------------------------------------------------------------------
 # Name          : SYSTEMPASSWORD
@@ -218,7 +218,7 @@ SYSPASSWORD = "password"
 # Default value : None
 # Mandatory     : Yes
 #-----------------------------------------------------------------------------
-SYSTEMPASSWORD = "password"
+SYSTEMPASSWORD = "manager"
 
 #-----------------------------------------------------------------------------
 # Name          : EMCONFIGURATION
@@ -249,7 +249,7 @@ EMCONFIGURATION = "LOCAL"
 # Default value : None
 # Mandatory     : Yes, if LOCAL specified for EMCONFIGURATION
 #-----------------------------------------------------------------------------
-SYSMANPASSWORD = "password"
+SYSMANPASSWORD = "manager"
 
 #-----------------------------------------------------------------------------
 # Name          : DBSNMPPASSWORD
@@ -259,7 +259,7 @@ SYSMANPASSWORD = "password"
 # Default value : None
 # Mandatory     : Yes, if EMCONFIGURATION is specified
 #-----------------------------------------------------------------------------
-DBSNMPPASSWORD = "password"
+DBSNMPPASSWORD = "manager"
 
 #-----------------------------------------------------------------------------
 # Name          : CENTRALAGENT
