@@ -62,6 +62,8 @@ cd /home/oracle
 mv .bash_profile .bash_profile_old
 wget https://raw.githubusercontent.com/marieleklering/project2/master/.bash_profile
 . .bash_profile
+cp .bash_profile db.env
+chmod +x db.env 
 
 ##download midias
 mkdir -p /home/oracle/midias/
@@ -87,5 +89,3 @@ mkdir -p /u01/app/oracle/oradata/
 mkdir -p /u01/app/oracle/flash_recovery_area/
 chown -R oracle.oinstall /u01/app
 chown -R oracle.oinstall /home/oracle/
-
-
