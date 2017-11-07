@@ -58,7 +58,7 @@ mount /dev/xvda1 /u01/
 
 ##download db.env file
 cd /home/oracle
-wget https://github.com/marieleklering/project2/blob/master/db.env
+wget https://raw.githubusercontent.com/marieleklering/project2/master/db.env
 .db.env
 
 ##download midias
@@ -69,8 +69,27 @@ wget https://s3.amazonaws.com/oracle-midias/p13390677_112040_Linux-x86-64_1of7.z
 wget https://s3.amazonaws.com/oracle-midias/p13390677_112040_Linux-x86-64_2of7.zip
 
 ##unzip midias
-unzip https://s3.amazonaws.com/oracle-midias/123010_fbo_ggs_Linux_x64_services_shiphome.zip
-unzip https://s3.amazonaws.com/oracle-midias/p13390677_112040_Linux-x86-64_1of7.zip
-unzip https://s3.amazonaws.com/oracle-midias/p13390677_112040_Linux-x86-64_2of7.zip
+unzip 123010_fbo_ggs_Linux_x64_services_shiphome.zip
+unzip p13390677_112040_Linux-x86-64_1of7.zip
+unzip p13390677_112040_Linux-x86-64_2of7.zip
+
+##create oracle directories
+mkdir -p /u01/app/oraInventory
+mkdir -p /u01/app/oracle
+mkdir -p /u01/app/oracle/product/11.2.0/db_1
+mkdir -p /u01/app/oracle/oradata/
+mkdir -p /u01/app/oracle/flash_recovery_area/
+chown -R oracle.oinstall /u01/app
+
+##download response file
+su - oracle
+cd /home/oracle/midias/
+wget https://raw.githubusercontent.com/marieleklering/project2/master/db_install.rsp
+wget https://raw.githubusercontent.com/marieleklering/project2/master/netca.rsp
+wget https://raw.githubusercontent.com/marieleklering/project2/master/dbca.rsp
+
+
+
+
 
 
