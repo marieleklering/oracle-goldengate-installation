@@ -8,6 +8,7 @@ useradd -u 54321 -g oinstall -G dba,oper oracle
 yum update -y
 
 ##add config for oracle database installation
+sed -i '/kernel.shmmax/s/^/#/g' /etc/sysctl.conf
 echo "kernel.shmmni = 4096" >> /etc/sysctl.conf
 echo "kernel.shmmax = 4398046511104" >> /etc/sysctl.conf
 echo "kernel.shmall = 1073741824" >> /etc/sysctl.conf
@@ -58,8 +59,9 @@ mount /dev/xvda1 /u01/
 
 ##download db.env file
 cd /home/oracle
-wget https://raw.githubusercontent.com/marieleklering/project2/master/db.env
-.db.env
+mv .bash_profile .bash_profile_old
+wget https://raw.githubusercontent.com/marieleklering/project2/master/.bash_profile
+. .bash_profile
 
 ##download midias
 mkdir -p /home/oracle/midias/
@@ -86,6 +88,18 @@ mkdir -p /u01/app/oracle/flash_recovery_area/
 chown -R oracle.oinstall /u01/app
 chown -R oracle.oinstall /home/oracle/
 
+##installation db software 
+su - oracle
+cd midias/database
+./runInstaller -silent -responseFile /home/oracle/midias/db_install.rsp -ignoreSysPrereqs -ignorePrereq -waitforcompletion -showProgress
+./u01/app/oraInventory/orainstRoot.sh
+./u01/app/oracle/product/11.2.0/db_1/root.sh
 
+##config netca
+cd /home/oracle/midias
+netca -silent -responseFile /home/oracle/midias/netca.rsp
+
+##install DB
+dbca -silent -responseFile /home/oracle/midias/dbca.rsp
 
 
