@@ -6,7 +6,7 @@ su - oracle -c "/home/oracle/midias/database/runInstaller -silent -responseFile 
 /u01/app/oracle/product/11.2.0/db_1/root.sh
 
 ##config netca
-su - oracle -c netca -silent -responseFile /home/oracle/midias/netca.rsp
+su - oracle -c "netca -silent -responseFile /home/oracle/midias/netca.rsp"
 
 ##install DB
-su - oracle -c dbca -silent -responseFile /home/oracle/midias/dbca.rsp
+su - oracle -c "dbca -silent -responseFile /home/oracle/midias/dbca.rsp"
