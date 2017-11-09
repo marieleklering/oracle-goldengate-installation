@@ -16,7 +16,7 @@ su - oracle -c "/home/oracle/midias/fbo_ggs_Linux_x64_services_shiphome/Disk1/ru
 
 ##config service manager
 ##db steps
-su - oracle -c "sqlplus / as sysdba @db_config.sql"
+su - oracle -c "sqlplus / as sysdba @/home/oracle/midias/db_config.sql"
 
 ##run config
 su - oracle -c "/home/oracle/12.3.0.1/bin/oggca.sh -silent -responseFile /home/oracle/midias/ogg_config.rsp"
