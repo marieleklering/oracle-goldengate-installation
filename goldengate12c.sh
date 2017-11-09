@@ -12,12 +12,11 @@ wget https://raw.githubusercontent.com/marieleklering/project2/master/db_config.
 chown -R oracle.oinstall /home/oracle/
 
 ##run installer
-su - oracle -c "./runInstaller -silent -nowait -ignoreSysPrereqs -responseFile /home/oracle/midias/oggcore.rsp"
+su - oracle -c "/home/oracle/midias/fbo_ggs_Linux_x64_services_shiphome/Disk1/runInstaller -silent -nowait -ignoreSysPrereqs -responseFile /home/oracle/midias/oggcore.rsp"
 
 ##config service manager
 ##db steps
 su - oracle -c "sqlplus / as sysdba @db_config.sql"
 
 ##run config
-cd /home/oracle/12.3.0.1/bin/
-su - oracle -c "./oggca.sh -silent -responseFile /home/oracle/midias/ogg_config.rsp"
+su - oracle -c "/home/oracle/12.3.0.1/bin/oggca.sh -silent -responseFile /home/oracle/midias/ogg_config.rsp"
