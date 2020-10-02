@@ -1,1 +1,1 @@
-# project2
+# Automation of Oracle Golden Gate installation
