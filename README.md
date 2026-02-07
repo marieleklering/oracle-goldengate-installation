@@ -89,3 +89,45 @@ Creates the Oracle directory tree and sets ownership:
 ```
 
 ---
+
+
+## Phase 2 — Oracle Database Installation (`oracle_install.sh`)
+
+### 2.1 Software-Only Install (`db_install.rsp`)
+
+Runs `runInstaller` in silent mode to install Oracle Database 11gR2 Enterprise Edition (software only, no database created yet). Key response-file settings:
+
+- Install option: `INSTALL_DB_SWONLY`
+- Oracle Home: `/u01/app/oracle/product/11.2.0/db_1`
+- Edition: Enterprise with all optional components (Partitioning, OLAP, Data Mining, Database Vault, Label Security, RAT)
+
+### 2.2 Root Scripts
+
+Executes the mandatory post-install root scripts:
+
+- `/u01/app/oraInventory/orainstRoot.sh`
+- `/u01/app/oracle/product/11.2.0/db_1/root.sh`
+
+### 2.3 Network Configuration (`netca.rsp`)
+
+Runs `netca` in silent mode to create:
+
+- **Listener:** `LISTENER` on TCP port 1521
+- **Naming methods:** TNSNAMES, ONAMES, HOSTNAME
+- **Net service name:** `EXTPROC_CONNECTION_DATA`
+
+### 2.4 Database Creation (`dbca.rsp`)
+
+Runs `dbca` in silent mode to create the `tpharma1` database:
+
+- Template: `General_Purpose.dbc`
+- SID / Global Name: `tpharma1`
+- Character set: AL32UTF8 / AL16UTF16
+- Storage: filesystem (`/u01/app/oracle/oradata/`)
+- Recovery: `/u01/app/oracle/flash_recovery_area/`
+- Type: OLTP with Automatic Memory Management (800 MB)
+- Enterprise Manager: Local (DB Control)
+- Sample schemas: installed
+- Default passwords: `manager` (SYS, SYSTEM, SYSMAN, DBSNMP) — **change immediately in production**
+
+---
