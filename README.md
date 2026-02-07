@@ -23,3 +23,15 @@ This repository automates the end-to-end provisioning of an **Oracle Database 11
 **GoldenGate deployment:** `newport1` — Admin Server :18001, Distribution Server :18002, Receiver Server :18003, Performance Metrics :18004–18005, Service Manager :18000.
 
 ---
+
+## Execution Order
+
+The scripts must be run **in sequence, as root**, on a fresh EC2 instance:
+
+| Step | Script | Purpose |
+|------|--------|---------|
+| 1 | `main.sh` | OS preparation — users, groups, kernel parameters, packages, media download |
+| 2 | `oracle_install.sh` | Oracle Database 11gR2 software install, network configuration, database creation |
+| 3 | `goldengate12c.sh` | GoldenGate 12c software install, database schema setup, deployment configuration |
+
+---
