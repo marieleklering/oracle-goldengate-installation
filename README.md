@@ -131,3 +131,89 @@ Runs `dbca` in silent mode to create the `tpharma1` database:
 - Default passwords: `manager` (SYS, SYSTEM, SYSMAN, DBSNMP) — **change immediately in production**
 
 ---
+
+## Phase 3 — GoldenGate Installation & Configuration (`goldengate12c.sh`)
+
+### 3.1 Directory Setup
+
+Creates the GoldenGate software home and deployment directories:
+
+```
+/home/oracle/12.3.0.1          ← OGG_SOFTWARE_HOME
+/home/oracle/oraInventory       ← OGG inventory
+/home/oracle/gg_deployments/ServiceManager
+```
+
+### 3.2 GoldenGate Software Install (`oggcore.rsp`)
+
+Runs the GoldenGate `runInstaller` in silent mode:
+
+- Install option: `ORA11g` (GoldenGate for Oracle 11g)
+- Software location: `/home/oracle/12.3.0.1`
+
+### 3.3 Database Preparation (`db_config.sql`)
+
+Connects as `SYSDBA` and prepares the database for GoldenGate replication:
+
+1. **Tablespace:** Creates `gg_tbs` (100 MB datafile at `/u01/app/oracle/oradata/tpharma1/gg_tbs_data01.dbf`)
+2. **GoldenGate user:** Creates `ggs` with unlimited quota on `gg_tbs`
+3. **Privileges:** Grants DBA, CREATE SESSION, CONNECT, RESOURCE, ALTER ANY TABLE, ALTER SYSTEM, LOCK ANY TABLE, SELECT ANY TRANSACTION, FLASHBACK ANY TABLE, and `EXECUTE ON UTL_FILE`
+4. **Admin privilege:** `dbms_goldengate_auth.grant_admin_privilege('ggs')`
+5. **Supplemental logging:** Enables database-level supplemental log data
+6. **Force logging:** Ensures all changes are logged (no `NOLOGGING` bypass)
+7. **Replication flag:** Sets `enable_goldengate_replication=TRUE`
+
+### 3.4 Deployment Configuration (`ogg_config.rsp`)
+
+Runs `oggca.sh` in silent mode to create the `newport1` deployment under the Service Manager:
+
+| Setting | Value |
+|---------|-------|
+| Deployment name | `newport1` |
+| Admin user | `oggadmin` / `oracle` |
+| Service Manager port | 18000 |
+| Admin Server port | 18001 |
+| Distribution Server port | 18002 |
+| Receiver Server port | 18003 |
+| Performance Metrics (TCP/UDP) | 18004 / 18005 |
+| GoldenGate schema | `ggs` |
+| Security (SSL/TLS) | Disabled |
+| Sharding | Disabled |
+| Oracle SID | `tpharma1` |
+
+---
+
+## File Inventory
+
+| File | Type | Used By |
+|------|------|---------|
+| `main.sh` | Shell script | Phase 1 — OS preparation |
+| `oracle_install.sh` | Shell script | Phase 2 — DB install |
+| `goldengate12c.sh` | Shell script | Phase 3 — GG install |
+| `db_install.rsp` | Response file | Oracle DB 11gR2 silent installer |
+| `netca.rsp` | Response file | Oracle Net Configuration Assistant |
+| `dbca.rsp` | Response file | Oracle Database Configuration Assistant |
+| `oggcore.rsp` | Response file | GoldenGate 12c silent installer |
+| `ogg_config.rsp` | Response file | GoldenGate deployment configuration (oggca) |
+| `db_config.sql` | SQL script | Database prep for GoldenGate replication |
+
+---
+
+## Prerequisites
+
+- An AWS EC2 instance running Amazon Linux or RHEL/CentOS (x86_64)
+- An attached EBS volume at `/dev/xvda1` with sufficient space (minimum ~20 GB for Oracle + GoldenGate)
+- Root / sudo access
+- Network access to S3 (`oracle-midias` bucket) and GitHub (`marieleklering/project2`) for media and config downloads
+
+---
+
+## Security Considerations
+
+> **This is a lab/PoC setup. Do not use these settings in production without hardening.**
+
+- All database passwords are set to `manager` — change these immediately.
+- The `ggs` user is granted `DBA` — scope this down for production.
+- The GoldenGate admin password is `oracle` — use a strong password.
+- SSL/TLS is disabled on the GoldenGate deployment — enable it for any non-local traffic.
+- Response files contain plaintext passwords — restrict file permissions (`chmod 600`).
